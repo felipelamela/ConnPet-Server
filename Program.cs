@@ -1,6 +1,14 @@
+using Api.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.AddDbContext<AppDbContext>(
+    opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+builder.Services.AddControllers();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -10,11 +18,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () =>
-{
-    return "OK";
-});
+app.MapGet("/", () => { return "OK"; });
 
-// app.MapControllers();
+app.UseAuthorization();
+app.MapControllers();
 
 app.Run();

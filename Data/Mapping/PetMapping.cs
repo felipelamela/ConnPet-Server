@@ -45,6 +45,8 @@ public class PetMapping : IEntityTypeConfiguration<Pet>
 
     builder.HasOne(p => p.Tutor)
         .WithMany(u => u.Pets)
-        .HasForeignKey(p => p.TutorId);
+        .HasForeignKey(p => p.TutorId)
+        .OnDelete(DeleteBehavior.Restrict);
+
   }
 }

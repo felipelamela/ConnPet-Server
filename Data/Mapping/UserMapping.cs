@@ -52,5 +52,21 @@ public class UserMapping : IEntityTypeConfiguration<User>
       .IsRequired(true)
       .HasColumnType("BIGINT");
 
+
+    builder.HasOne(x => x.LoginAuth)
+      .WithMany()
+      .HasForeignKey(x => x.LoginAuthId)
+      .OnDelete(DeleteBehavior.Restrict);
+
+    builder.HasOne(x => x.Address)
+      .WithMany()
+      .HasForeignKey(x => x.AddressId)
+      .OnDelete(DeleteBehavior.Restrict);
+
+    builder.HasOne(x => x.Clinic)
+        .WithMany(c => c.Users)
+        .HasForeignKey(x => x.ClinicId)
+        .OnDelete(DeleteBehavior.Restrict);
+
   }
 }

@@ -8,7 +8,7 @@ namespace Api.Data.Mapping
   {
     public void Configure(EntityTypeBuilder<LoginAuth> builder)
     {
-      builder.ToTable("Tutor");
+      builder.ToTable("LoginAuth");
 
       builder.HasKey(x => x.Id);
 

@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: connpet-db
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1Q2w#e4R
+    ports:
+      - "1433:1433" 
+    networks:
+      - connpet-network
+    volumes:
+      - sqlserver-data:/var/opt/mssql 
+
+networks:
+  connpet-network:
+    driver: bridge
+
+volumes:
+  sqlserver-data:
+    driver: local

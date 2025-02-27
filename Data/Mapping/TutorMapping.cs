@@ -39,7 +39,8 @@ namespace Api.Data.Mapping
       builder.HasOne(t => t.Address)
           .WithMany(a => a.Tutors)
           .HasForeignKey(t => t.AddressId)
-          .OnDelete(DeleteBehavior.SetNull);
+          .OnDelete(DeleteBehavior.Restrict);
+          
     }
   }
 }
